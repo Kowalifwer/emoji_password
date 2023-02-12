@@ -11,6 +11,49 @@ function toggleHidden(n) {
     }
 }
 
+// feel free to add more rules
+function checkPwd1PasswordStregth() {
+  const password = document.getElementById('pwd1').value;
+  let score = 0;
+
+  // add a point if password is longer than 8 and 12 chars
+  if (password.length >= 8) {
+      score += 1;
+  }
+  else if (password.length >= 12) {
+    score += 2;
+  }
+  // for each special character add a point
+  var regex = /[^a-zA-Z0-9]/;
+  for (let i = 0; i < password.length; i++) {
+      if (regex.test(password[i])) {
+          score += 1;
+      }
+  }
+  // add a point if password contains digits
+  regex = /\d/;
+  if (regex.test(password)) {
+      score += 1;
+  }
+  
+  strength = calculateStrengthValue(score);
+  document.getElementById("strength").innerHTML = strength;
+}
+
+function calculateStrengthValue(score) {
+  let strength = ""
+    if (score <= 4) {
+      strength = 'poor';
+  } else if (score <= 8) {
+      strength = 'fair';
+  } else if (score <= 12) {
+      strength = 'good';
+  } else {
+      strength = 'excellent';
+  }
+  return strength;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('HTML loaded, script running')
     //You may run all your code here. Think of this a the main() method in other langauges.

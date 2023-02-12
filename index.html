@@ -2,13 +2,19 @@
 <html>
     <head>
         <script type="text/javascript" src="script.js"></script>
+        <style>
+            .center {
+              text-align: center;
+            }
+            </style>
     </head>
     <body>
+    <div class="center">
         <h1>Emoji Passwords</h1>
         <form action="/action_page.php">
-            <label for="pwd">Please create a password:</label><br><input type="password" id="pwd1" name="pwd1">
+            <label for="pwd">Please create a password:</label><br><input type="password" id="pwd1" name="pwd1" oninput="checkPwd1PasswordStregth()">
             <button type="button" id="toggle1" onclick="toggleHidden(1)">Show password</button>  
-            <p>Strength: <b>TO-DO</b></p>
+            <p>Strength: <b id="strength"></b></p>
             <br><br><br>
             <label for="pwd">Please create a password and select 2 emoji:</label><br><input type="password" id="pwd2" name="pwd1">  
             <button type="button" id="toggle2" onclick="toggleHidden(2)">Show password</button>  
@@ -27,5 +33,6 @@
             <br><br><br>
             <input type="submit" value="Submit">
         </form>
+    </div>
     </body>
 </html>
