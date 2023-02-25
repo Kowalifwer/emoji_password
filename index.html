@@ -12,24 +12,24 @@
     <div class="center">
         <h1>Emoji Passwords</h1>
         <form action="/action_page.php">
-            <label for="pwd">Please create a password:</label><br><input type="password" id="pwd1" name="pwd1" oninput="checkPwd1PasswordStregth()">
+            <label for="pwd1">Please create a password:</label><br><input type="password" id="pwd1" name="pwd1" oninput="checkPwdPasswordStrength('pwd1','strength1')">
             <button type="button" id="toggle1" onclick="toggleHidden(1)">Show password</button>  
-            <p>Strength: <b id="strength"></b></p>
+            <p>Strength: <b id="strength1"></b></p>
             <br><br><br>
-            <label for="pwd">Please create a password and select 2 emoji:</label><br><input type="password" id="pwd2" name="pwd1">  
-            <button type="button" id="toggle2" onclick="toggleHidden(2)">Show password</button>  
+            <label for="pwd2">Please create a password and select 2 emoji:</label><br><input type="password" id="pwd2" name="pwd2"oninput="checkPwdPasswordStrength('pwd2','strength2')">
+            <button type="button" id="toggle2" onclick="toggleHidden(2)">Show password</button>
+            <p>Strength: <b id="strength2"></b></p>
             <p>
-                <button id='emj1' type='button'>&#128512;</button>
-                <button id='emj2' type='button'>&#128512;</button>
-                <button id='emj3' type='button'>&#128512;</button><br>
-                <button id='emj4' type='button'>&#128512;</button>
-                <button id='emj5' type='button'>&#128512;</button>
-                <button id='emj6' type='button'>&#128512;</button><br>
-                <button id='emj7' type='button'>&#128512;</button>
-                <button id='emj8' type='button'>&#128512;</button>
-                <button id='emj9' type='button'>&#128512;</button>  
+                <button id='emj1' type='button' onclick="addEmoji('&#128512;')">&#128512;</button>
+                <button id='emj2' type='button' onclick="addEmoji('&#128513;')">&#128513;</button>
+                <button id='emj3' type='button' onclick="addEmoji('&#128514;')">&#128514;</button><br>
+                <button id='emj4' type='button' onclick="addEmoji('&#128515;')">&#128515;</button>
+                <button id='emj5' type='button' onclick="addEmoji('&#128516;')">&#128516;</button>
+                <button id='emj6' type='button' onclick="addEmoji('&#128517;')">&#128517;</button><br>
+                <button id='emj7' type='button' onclick="addEmoji('&#128518;')">&#128518;</button>
+                <button id='emj8' type='button' onclick="addEmoji('&#128519;')">&#128519;</button>
+                <button id='emj9' type='button' onclick="addEmoji('&#128520;')">&#128520;</button>
             </p>
-            <p>Strength:<b>TO-DO</b></p>
             <br><br><br>
             <input type="submit" value="Submit">
         </form>
