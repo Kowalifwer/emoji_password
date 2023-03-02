@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebas
 import { getDatabase, ref, set, get} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"
 import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js'
 
-const USE_FIREBASE = false;
+const USE_FIREBASE = true;
 
 if (USE_FIREBASE) {
     // import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
@@ -162,7 +162,7 @@ if (USE_FIREBASE) {
                         let successContent = `
                             <div class="success">
                                 <h1>Thank you for participating, ${user.alias}!</h1>
-                                <p>You have successfully submitted your password - ${user.passwords[user.passwords.length - 1].password}.</p>
+                                <p>You have successfully submitted your password - <span class="pw-highlight">${user.passwords[user.passwords.length - 1].password}</span></p>
                                 <p>Please remember your alias, as you will need it for a future survey.</p>
                             </div>
                         `
