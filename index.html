@@ -6,33 +6,45 @@
             .center {
               text-align: center;
             }
-            </style>
+        </style>
     </head>
-    <body>
-    <div class="center">
-        <h1>Emoji Passwords</h1>
-        <form action="/action_page.php">
-            <label for="pwd1">Please create a password:</label><br><input type="password" id="pwd1" name="pwd1" oninput="checkPwdPasswordStrength('pwd1','strength1')">
-            <button type="button" id="toggle1" onclick="toggleHidden(1)">Show password</button>  
-            <p>Strength: <b id="strength1"></b></p>
-            <br><br><br>
-            <label for="pwd2">Please create a password and select 2 emoji:</label><br><input type="password" id="pwd2" name="pwd2"oninput="checkPwdPasswordStrength('pwd2','strength2')">
-            <button type="button" id="toggle2" onclick="toggleHidden(2)">Show password</button>
-            <p>Strength: <b id="strength2"></b></p>
-            <p>
-                <button id='emj1' type='button' onclick="addEmoji('&#128512;')">&#128512;</button>
-                <button id='emj2' type='button' onclick="addEmoji('&#128513;')">&#128513;</button>
-                <button id='emj3' type='button' onclick="addEmoji('&#128514;')">&#128514;</button><br>
-                <button id='emj4' type='button' onclick="addEmoji('&#128515;')">&#128515;</button>
-                <button id='emj5' type='button' onclick="addEmoji('&#128516;')">&#128516;</button>
-                <button id='emj6' type='button' onclick="addEmoji('&#128517;')">&#128517;</button><br>
-                <button id='emj7' type='button' onclick="addEmoji('&#128518;')">&#128518;</button>
-                <button id='emj8' type='button' onclick="addEmoji('&#128519;')">&#128519;</button>
-                <button id='emj9' type='button' onclick="addEmoji('&#128520;')">&#128520;</button>
-            </p>
-            <br><br><br>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+    <body class="center">
+        <h1>Emoji Passwords web trial</h1>
+        <div id="content">
+            <form id="finalForm">
+                <label for="alias">Please enter an alias. Make sure to remember it, since it will be used in the follow up survey</label><br>
+                <input id="alias" type="text" minlength="3" maxlength="12" required autocomplete="off"> <br>
+                
+                <br><br><br>
+
+                <label for="pwd1">Please create a password:</label><br>
+                <input type="password" id="pwd1" name="pwd1" oninput="checkPwdPasswordStrength('pwd1','strength1')" maxlength="20" required autocomplete="off">
+                <button type="button" id="toggle1" onclick="toggleHidden(1)">Show password</button>  
+                <p>Strength: <b id="strength1"></b></p>
+
+                <br><br><br>
+
+                <label for="pwd2">Please create a password and select 2 emoji:</label><br>
+                <input type="password" id="pwd2" name="pwd2"oninput="checkPwdPasswordStrength('pwd2','strength2')" maxlength="20" required autocomplete="off">
+                <button type="button" id="toggle2" onclick="toggleHidden(2)">Show password</button>
+                <p>Strength: <b id="strength2"></b></p>
+                <p>
+                    <button id='emj1' type='button' onclick="addEmoji('&#128512;')">&#128512;</button>
+                    <button id='emj2' type='button' onclick="addEmoji('&#128513;')">&#128513;</button>
+                    <button id='emj3' type='button' onclick="addEmoji('&#128514;')">&#128514;</button><br>
+                    <button id='emj4' type='button' onclick="addEmoji('&#128515;')">&#128515;</button>
+                    <button id='emj5' type='button' onclick="addEmoji('&#128516;')">&#128516;</button>
+                    <button id='emj6' type='button' onclick="addEmoji('&#128517;')">&#128517;</button><br>
+                    <button id='emj7' type='button' onclick="addEmoji('&#128518;')">&#128518;</button>
+                    <button id='emj8' type='button' onclick="addEmoji('&#128519;')">&#128519;</button>
+                    <button id='emj9' type='button' onclick="addEmoji('&#128520;')">&#128520;</button>
+                </p>
+
+                <br><br><br>
+
+                <button type="button" id="submitButton">Submit your password!</button>
+            </form>
+        </div>
+        <script type="module" src="dataHandler.js"></script>
     </body>
 </html>
