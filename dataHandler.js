@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebas
 import { getDatabase, ref, set, get} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"
 import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js'
 
-const USE_FIREBASE = true;
+const USE_FIREBASE = false;
 
 if (USE_FIREBASE) {
     // import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
