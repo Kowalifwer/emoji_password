@@ -130,6 +130,7 @@ if (USE_FIREBASE) {
                         password: password,
                         datetimeSubmitted: getDatetime(),
                         score: scorePassword(password),
+                        groupId: GROUP_ID
                     }
                 ]
 
@@ -144,7 +145,7 @@ if (USE_FIREBASE) {
                 if (existing_passwords) {
                     //check existing passwords is an array
                     if (Array.isArray(existing_passwords)) {
-                        if (confirm("You have already submitted a password before. You can submit another password, and it will override your previous entry. Are you sure you want to do that?")) {
+                        if (confirm("You have already submitted a password before. You can submit another password, but it will override your previous entry. Are you sure you want to do that?")) {
                             //add passwords to existing passwords
                             existing_passwords.push(passwords[0]);
                             passwords = existing_passwords;
