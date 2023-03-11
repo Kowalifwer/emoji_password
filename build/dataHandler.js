@@ -129,6 +129,7 @@ if (USE_FIREBASE) {
                     {
                         password: password,
                         datetimeSubmitted: getDatetime(),
+                        score: scorePassword(password),
                     }
                 ]
 

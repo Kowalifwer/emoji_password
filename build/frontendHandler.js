@@ -1,22 +1,24 @@
 //create a function, that will map a number (0-100) to a strength color (5 colors total from good to great)
+
 function scoreToColorAndStrength(score) {
-    let color = "";
-    let strength = "";
+    //map color from 0-100, from red to green
+    let color = ""
+    let strength = "poor";
     if (score <= 20) {
         color = "red";
-        strength = "very weak";
+        strength = "poor";
     } else if (score <= 40) {
         color = "orange";
-        strength = "weak";
+        strength = "poor";
     } else if (score <= 60) {
-        color = "yellow";
-        strength = "good";
+        color = "Gold"
+        strength = "medium";
     } else if (score <= 80) {
-        color = "lightgreen";
-        strength = "strong";
+        color = "yellowgreen";
+        strength = "medium";
     } else {
         color = "green";
-        strength = "impenetrable";
+        strength = "strong";
     }
     return [color, strength];
 }
@@ -33,7 +35,7 @@ function scorePassword(pass) {
     for (var i=0; i<pass.length; i++) {
         if (pass[i].match(/[\uD800-\uDFFF]/)) { //IF EMOJI
             emojis[pass[i]] = (emojis[pass[i]] || 0) + 1;
-            score += 15.0 / emojis[pass[i]];
+            score += 12.0 / emojis[pass[i]];
         } else { //IF ANY OTHER CHARACTER
             letters[pass[i]] = (letters[pass[i]] || 0) + 1;
             score += 5.0 / letters[pass[i]];
@@ -54,23 +56,29 @@ function scorePassword(pass) {
     }
     score += (variationCount - 1) * 10;
 
-    return parseInt(score);
+    return parseInt(Math.min(score, 100));
 }
 
 document.addEventListener('backendContentLoaded', function() {
-    finalForm = document.getElementById('finalForm');
-    previousBtn = document.getElementById('previous');
-    nextBtn = document.getElementById('next');
+    let finalForm = document.getElementById('finalForm');
+    let previousBtn = document.getElementById('previous');
+    let nextBtn = document.getElementById('next');
 
-    pwd = document.getElementById('pwd');
-    pwdConfirm = document.getElementById('pwdConfirm');
-    pwdStrength = document.getElementById('pwdStrength');
+    let pwd = document.getElementById('pwd');
+    let pwdConfirm = document.getElementById('pwdConfirm');
+    let pwdStrength = document.getElementById('pwdStrength');
+
+    let pwdMeter = document.getElementById('pwdMeter');
+
     pwd.addEventListener('input', function(e) {
         let password = e.target.value;
         let score = scorePassword(password);
         let [color, strength] = scoreToColorAndStrength(score);
         pwdStrength.innerHTML = strength;
         pwdStrength.style.color = color;
+        
+        pwdMeter.children[0].style.width = score + '%';
+        pwdMeter.children[0].style.backgroundColor = color;
     });
 
     function handlePreviousNextBtns() {
@@ -109,6 +117,18 @@ document.addEventListener('backendContentLoaded', function() {
             if (pwd_field) {
                 let password = pwd_field.value;
                 //if we are in emoji mode
+                let expectedStrength = pwd_field.getAttribute('data-strength');
+                console.log(expectedStrength);
+                if (expectedStrength) {
+                    let score = scorePassword(password);
+                    let strength = scoreToColorAndStrength(score)[1];
+                    if (strength != expectedStrength) {
+                        pwd_field.setCustomValidity(`Password must be "${expectedStrength}" strength to continue.`);
+                        pwd_field.reportValidity();
+                        resolve(false);
+                    }
+                }
+
                 if (finalForm.classList.contains('emoji')) { 
                     //make sure the password contains at least one emoji
                     let containsEmoji = false;

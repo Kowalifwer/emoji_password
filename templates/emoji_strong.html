@@ -1,0 +1,57 @@
+<div class="instructions">
+    <span>Guidelines for your task <b>(please read carefully!)</b></span><br><br>
+    • Picture yourself setting up an account for a website that you intend to use frequently.<br>
+    • Generate a password for this account that has a <b style="color: green;">strong</b> level of strength, achieved by including a mixture of numbers, letters, and other characters.<br>
+    • Continue with the 'Next step' button, until the last section where you can submit your results with 'Submit' button.<br>
+</div>
+
+<form id="finalForm" class="emoji">
+    <div>
+        <section class="active">
+            <p>Please enter an <b>ALIAS</b> <br>Make sure to <b>remember it</b>, since you will need it in a <b>follow up survey</b></p>
+            <input id="alias" type="text" minlength="3" maxlength="12" required autocomplete="off">
+        </section>
+
+        <section>
+            <p>Please create password:</p>
+            <input type="text" id="pwd" minLength="6" maxlength="20" required autocomplete="off" data-strength="strong">
+            <p>Strength: <b id="pwdStrength"></b></p>
+            <div id="pwdMeter">
+                <div></div>
+            </div>
+            <div class="emoji-container">
+                <button type='button'>&#128512;</button>
+                <button type='button'>&#128513;</button>
+                <button type='button'>&#128514;</button><br>
+                <button type='button'>&#128515;</button>
+                <button type='button'>&#128516;</button>
+                <button type='button'>&#128517;</button><br>
+                <button type='button'>&#128518;</button>
+                <button type='button'>&#128519;</button>
+                <button type='button'>&#128520;</button>
+            </div>
+        </section>
+
+        <section>
+            <p>Confirm password:</p>
+            <input type="text" id="pwdConfirm" name="pwdConfirm" required autocomplete="off">
+            <div class="emoji-container">
+                <button type='button'>&#128512;</button>
+                <button type='button'>&#128513;</button>
+                <button type='button'>&#128514;</button><br>
+                <button type='button'>&#128515;</button>
+                <button type='button'>&#128516;</button>
+                <button type='button'>&#128517;</button><br>
+                <button type='button'>&#128518;</button>
+                <button type='button'>&#128519;</button>
+                <button type='button'>&#128520;</button>
+            </div>
+        </section>
+
+    </div>
+    
+    <div style="margin-top: 25px; display: flex; gap: 25px; justify-content: center;">
+        <button class="hidden" type="button" id="previous">Previous step</button>
+        <button type="button" id="next">Next step</button>
+    </div>
+</form>

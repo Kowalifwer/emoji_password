@@ -1,4 +1,10 @@
-<span>group [XYZ]: Medium strength alphanumeric password <b>WITH</b> emojisFor this task, ... <br>[INSERT OUR GROUP TEXT]</span>
+<div class="instructions">
+    <span>Guidelines for your task <b>(please read carefully!)</b></span><br><br>
+    • Picture yourself setting up an account for a website that you intend to use frequently.<br>
+    • Generate a password for this account that has a <b style="color: gold;">medium</b> level of strength, achieved by including a mixture of numbers, letters, and other characters.<br>
+    • Continue with the 'Next step' button, until the last section where you can submit your results with 'Submit' button.<br>
+</div>
+
 <form id="finalForm" class="emoji">
     <div>
         <section class="active">
@@ -8,10 +14,12 @@
 
         <section>
             <p>Please create password:</p>
-            <input type="text" id="pwd" maxlength="20" required autocomplete="off">
+            <input type="text" id="pwd" minLength="6" maxlength="20" required autocomplete="off" data-strength="medium">
             <p>Strength: <b id="pwdStrength"></b></p>
+            <div id="pwdMeter">
+                <div></div>
+            </div>
             <div class="emoji-container">
-                <span>please include at least one emoji from the buttons below</span><br>
                 <button type='button'>&#128512;</button>
                 <button type='button'>&#128513;</button>
                 <button type='button'>&#128514;</button><br>
@@ -42,8 +50,8 @@
 
     </div>
     
-    <div style="margin-top: 50px; display: flex; gap: 25px; justify-content: center;">
-        <button class="hidden" type="button" id="previous">Go back</button>
-        <button type="button" id="next">Continue!</button>
+    <div style="margin-top: 25px; display: flex; gap: 25px; justify-content: center;">
+        <button class="hidden" type="button" id="previous">Previous step</button>
+        <button type="button" id="next">Next step</button>
     </div>
 </form>
