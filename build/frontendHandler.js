@@ -81,6 +81,16 @@ document.addEventListener('backendContentLoaded', function() {
         pwdMeter.children[0].style.backgroundColor = color;
     });
 
+    //prevent copying from pwd
+    pwd.addEventListener('copy', function(e) {
+        e.preventDefault();
+    });
+
+    //prevent pasting into pwdConfirm
+    pwdConfirm.addEventListener('paste', function(e) {
+        e.preventDefault();
+    });
+
     function handlePreviousNextBtns() {
         if (currentSection == 0) {
             previousBtn.classList.add('hidden');
