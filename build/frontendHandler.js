@@ -91,7 +91,7 @@ document.addEventListener('backendContentLoaded', function() {
         if (currentSection == sections.length - 1) {
             nextBtn.innerHTML = 'Submit!';
         } else {
-            nextBtn.innerHTML = 'Next';
+            nextBtn.innerHTML = 'Next step';
         }
     }
 
@@ -118,7 +118,6 @@ document.addEventListener('backendContentLoaded', function() {
                 let password = pwd_field.value;
                 //if we are in emoji mode
                 let expectedStrength = pwd_field.getAttribute('data-strength');
-                console.log(expectedStrength);
                 if (expectedStrength) {
                     let score = scorePassword(password);
                     let strength = scoreToColorAndStrength(score)[1];
@@ -159,14 +158,18 @@ document.addEventListener('backendContentLoaded', function() {
         }
     })
 
-    emoji_container = document.querySelector('.emoji-container');
-    //make a bubbling event listener for each button in the emoji container
-    emoji_container.addEventListener('click', function(e) {
-        if (e.target.tagName == 'BUTTON') {
-            pwd.value += e.target.innerHTML;
-            pwd.dispatchEvent(new Event('input'));
-        }
-    })
+    emoji_containers = document.querySelectorAll('.emoji-container');
+    for (let i = 0; i < emoji_containers.length; i++) {
+        let emoji_container = emoji_containers[i];
+        emoji_container.addEventListener('click', function(e) {
+            if (e.target.tagName == 'BUTTON') {
+                let container = e.target.closest('section');
+                let containerPwd = container.querySelector('input[type="text"]');
+                containerPwd.value += e.target.innerHTML;
+                containerPwd.dispatchEvent(new Event('input'));
+            }
+        })
+    }
 
     sections = finalForm.querySelectorAll('section');
     //we need a system to keep track of which section we are on
