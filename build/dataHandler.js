@@ -55,12 +55,12 @@ if (USE_FIREBASE) {
                 console.log("existing content is not null. using local storage.")
                 replaceContent(existingContent);
                 resolve(GROUP_ID)
-            } else if (existingGroupId != GROUP_ID) {
+            } else if (existingGroupId != GROUP_ID || !existingContent) {
                 if (GROUP_ID == null) { //if the url does not have a group in the parameters, it is wrong and user should not be able to participate
                     replaceContent(createErrorMessage("You are not in a valid user group."));
                     reject()
                 }
-                console.log("existing content is null. fetching from database.")
+                console.log("existing content is null or group_ids don't match. fetching from database.")
                 validateGroupAndGetContent(GROUP_ID).then((result) => {
                     localStorage.setItem("groupId", GROUP_ID);
                     if (result != false) {
