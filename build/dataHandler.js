@@ -34,8 +34,6 @@ if (USE_FIREBASE) {
             get(ref(database, 'groups/' + GROUP_ID)).then((snapshot) => {
                 if (snapshot.exists()) { //if the group exists, we can fetch the task from the database, and display the relevant task to the user.
                     let groupTemplateString = snapshot.val();
-                    //remove first and last character, since they are the quotes
-                    // groupTemplateString = groupTemplateString.substring(1, groupTemplateString.length - 1);
                     resolve(groupTemplateString)
                 } else {
                     replaceContent(createErrorMessage("No experiment found for the user group that you are in. Sorry."));
@@ -51,17 +49,20 @@ if (USE_FIREBASE) {
     function populateContent() {
         return new Promise((resolve, reject) => {
             let existingContent = localStorage.getItem("groupContent");
-            if (existingContent != null) {
+            let existingGroupId = localStorage.getItem("groupId");
+
+            if (existingContent && existingGroupId == GROUP_ID) {
                 console.log("existing content is not null. using local storage.")
                 replaceContent(existingContent);
                 resolve(GROUP_ID)
-            } else {
+            } else if (existingGroupId != GROUP_ID) {
                 if (GROUP_ID == null) { //if the url does not have a group in the parameters, it is wrong and user should not be able to participate
                     replaceContent(createErrorMessage("You are not in a valid user group."));
                     reject()
                 }
                 console.log("existing content is null. fetching from database.")
                 validateGroupAndGetContent(GROUP_ID).then((result) => {
+                    localStorage.setItem("groupId", GROUP_ID);
                     if (result != false) {
                         replaceContent(result);
                         localStorage.setItem("groupContent", result);
