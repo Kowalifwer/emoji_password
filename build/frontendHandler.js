@@ -89,7 +89,11 @@ document.addEventListener('backendContentLoaded', function() {
 
     function validateSection(section) {
         return new Promise(function(resolve) {
+            //reset the validator state on the password fields
             pwdConfirm.setCustomValidity('');
+            pwd.setCustomValidity('');
+
+            //BASE FIELD VALIDATION
             let inputs = section.querySelectorAll('input');
             inputs.forEach(function(input) {
                 let valid = input.checkValidity();
@@ -98,6 +102,32 @@ document.addEventListener('backendContentLoaded', function() {
                     resolve(false);
                 }
             })
+
+            //CUSTOM VALIDATION
+            //we are in section 2 - password input
+            pwd_field = section.querySelector('#pwd');
+            if (pwd_field) {
+                let password = pwd_field.value;
+                //if we are in emoji mode
+                if (finalForm.classList.contains('emoji')) { 
+                    //make sure the password contains at least one emoji
+                    let containsEmoji = false;
+                    for (let i = 0; i < password.length; i++) {
+                        if (password[i].match(/[\uD800-\uDFFF]/)) {
+                            containsEmoji = true;
+                            break;
+                        }
+                    }
+                    if (!containsEmoji) {
+                        pwd_field.setCustomValidity('Password must contain at least one emoji.');
+                        pwd_field.reportValidity();
+                        resolve(false);
+                    }
+                } else { //TODO: add extra validators for non emoji modes.
+                    //
+                }
+            }
+
             resolve(true);
         })
     }
@@ -134,24 +164,20 @@ document.addEventListener('backendContentLoaded', function() {
     nextBtn.addEventListener('click', function() {
         validateSection(sections[currentSection]).then(success => {
             if (success) {
-                if (currentSection < sections.length - 1) {
+                if (currentSection < sections.length - 1) { //if we are not on the last section
                     sections[currentSection].classList.remove('active');
                     currentSection++;
                     sections[currentSection].classList.add('active');
                     handlePreviousNextBtns();
-                } else {
+                } else { //last section (nextu button should trigger form submission)
                     //check that passwords match
                     if (pwd.value != pwdConfirm.value) {
-                        console.log('passwords do not match')
-                        console.log(pwd.value)
-                        console.log(pwdConfirm.value)
                         pwdConfirm.setCustomValidity('Passwords do not match. Hint: they should!');
                         pwdConfirm.reportValidity();
                         return;
                     } else {
-                        console.log('passwords match')
                         pwdConfirm.setCustomValidity('');
-                        //submit the data to the server here.
+                        //submit the data to be hadnled by dataHandler.js
                         //send a custom event 'sendData' to the finalForm. pass as parameters, the alias and password
                         finalForm.dispatchEvent(new CustomEvent('sendData', {
                             detail: {

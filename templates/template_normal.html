@@ -1,0 +1,26 @@
+<span>group [XYZ]: Medium strength alphanumeric password <b>without</b> emojisFor this task, ... <br>[INSERT OUR GROUP TEXT]</span>
+<form id="finalForm" class="emoji">
+    <div>
+        <section class="active">
+            <p>Please enter an <b>ALIAS</b> <br>Make sure to <b>remember it</b>, since you will need it in a <b>follow up survey</b></p>
+            <input id="alias" type="text" minlength="3" maxlength="12" required autocomplete="off">
+        </section>
+
+        <section>
+            <p>Please create a password:</p>
+            <input type="text" id="pwd" name="pwd" required autocomplete="off" minLength="8" maxLength="12">
+            <p>You password strength: <br><b id="pwdStrength"></b></p>
+        </section>
+
+        <section>
+            <p>Confirm password:</p>
+            <input type="text" id="pwdConfirm" name="pwdConfirm" required autocomplete="off">
+        </section>
+
+    </div>
+    
+    <div style="margin-top: 50px; display: flex; gap: 25px; justify-content: center;">
+        <button class="hidden" type="button" id="previous">Go back</button>
+        <button type="button" id="next">Continue!</button>
+    </div>    
+</form>

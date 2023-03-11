@@ -23,11 +23,17 @@ body * {
 
 #pwdStrength {
     font-size: 30px;
-    margin-top: 25px;
 }
 
 .hidden {
     display: none;
+}
+
+.emoji-container {
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: center; */
+    margin: 20px 0;
 }
 
 .emoji-container button {
@@ -62,8 +68,12 @@ body * {
 
 section p {
     margin: 0;
-    margin-bottom: 35px;
     font-size: 18px;
+}
+
+section input {
+    margin-top: 25px;
+    margin-bottom: 15px;
 }
 
 section p:last-child {
