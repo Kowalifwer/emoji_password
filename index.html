@@ -1,54 +1,74 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script type="text/javascript" src="script.js"></script>
-        <style>
-            .center {
-                text-align: center;
-            }
-            .pw-highlight {
-                background-color: #ff0;
-                font-weight: bold;
-            }
-        </style>
+        <script type="text/javascript" src="frontendHandler.js"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
-    <body class="center">
-        <h1>Emoji Passwords web trial</h1>
-        <div id="content">
-            <form id="finalForm">
-                <label for="alias">Please enter an alias. Make sure to remember it, since it will be used in the follow up survey</label><br>
-                <input id="alias" type="text" minlength="3" maxlength="12" required autocomplete="off"> <br>
-                
-                <br><br><br>
+    <body class="center center_content">
+        <div>
+            <h1 style="margin-top: 20px;">Emoji Passwords web trial</h1>
+            <div id="content">
+                <span>group 1: Medium strength alphanumeric password without emojisFor this task, ... <br>[INSERT OUR GROUP TEXT]</span>
+                <form id="finalForm">
+                    <div>
+                        <section class="active">
+                            <p>Please enter an <b>ALIAS</b> <br>Make sure to <b>remember it</b>, since you will need it in a <b>follow up survey</b></p>
+                            <input id="alias" type="text" minlength="3" maxlength="12" required autocomplete="off">
+                        </section>
 
-                <label for="pwd1">Please create a password:</label><br>
-                <input type="password" id="pwd1" name="pwd1" oninput="checkPwdPasswordStrength('pwd1','strength1')" maxlength="20" required autocomplete="off">
-                <button type="button" id="toggle1" onclick="toggleHidden(1)">Show password</button>  
-                <p>Strength: <b id="strength1"></b></p>
+                        <!-- <section>
+                            <p>Please create a password:</p>
+                            <input type="text" id="pwd" name="pwd" required autocomplete="off" minLength="8" maxLength="12">
+                            <p>You password strength: <br><b id="pwdStrength"></b></p>
+                        </section> -->
 
-                <br><br><br>
+                        <section>
+                            <p>Please create password:</p>
+                            <input type="text" id="pwd" maxlength="20" required autocomplete="off">
+                            <p>Strength: <b id="pwdStrength"></b></p>
+                            <div class="emoji-container">
+                                <button type='button'>&#128512;</button>
+                                <button type='button'>&#128513;</button>
+                                <button type='button'>&#128514;</button><br>
+                                <button type='button'>&#128515;</button>
+                                <button type='button'>&#128516;</button>
+                                <button type='button'>&#128517;</button><br>
+                                <button type='button'>&#128518;</button>
+                                <button type='button'>&#128519;</button>
+                                <button type='button'>&#128520;</button>
+                            </div>
+                        </section>
 
-                <label for="pwd2">Please create a password and select 2 emoji:</label><br>
-                <input type="password" id="pwd2" name="pwd2"oninput="checkPwdPasswordStrength('pwd2','strength2')" maxlength="20" required autocomplete="off">
-                <button type="button" id="toggle2" onclick="toggleHidden(2)">Show password</button>
-                <p>Strength: <b id="strength2"></b></p>
-                <p>
-                    <button id='emj1' type='button' onclick="addEmoji('&#128512;')">&#128512;</button>
-                    <button id='emj2' type='button' onclick="addEmoji('&#128513;')">&#128513;</button>
-                    <button id='emj3' type='button' onclick="addEmoji('&#128514;')">&#128514;</button><br>
-                    <button id='emj4' type='button' onclick="addEmoji('&#128515;')">&#128515;</button>
-                    <button id='emj5' type='button' onclick="addEmoji('&#128516;')">&#128516;</button>
-                    <button id='emj6' type='button' onclick="addEmoji('&#128517;')">&#128517;</button><br>
-                    <button id='emj7' type='button' onclick="addEmoji('&#128518;')">&#128518;</button>
-                    <button id='emj8' type='button' onclick="addEmoji('&#128519;')">&#128519;</button>
-                    <button id='emj9' type='button' onclick="addEmoji('&#128520;')">&#128520;</button>
-                </p>
+                        <!-- <section>
+                            <p>Confirm password:</p>
+                            <input type="text" id="pwdConfirm" name="pwdConfirm" required autocomplete="off">
+                        </section> -->
 
-                <br><br><br>
-
-                <button type="button" id="submitButton">Submit your password!</button>
-            </form>
+                        <section>
+                            <p>Confirm password:</p>
+                            <input type="text" id="pwdConfirm" name="pwdConfirm" required autocomplete="off">
+                            <div class="emoji-container">
+                                <button type='button'>&#128512;</button>
+                                <button type='button'>&#128513;</button>
+                                <button type='button'>&#128514;</button><br>
+                                <button type='button'>&#128515;</button>
+                                <button type='button'>&#128516;</button>
+                                <button type='button'>&#128517;</button><br>
+                                <button type='button'>&#128518;</button>
+                                <button type='button'>&#128519;</button>
+                                <button type='button'>&#128520;</button>
+                            </div>
+                        </section>
+                    </div>
+                    
+                    <div style="margin-top: 50px; display: flex; gap: 25px; justify-content: center;">
+                        <button class="hidden" type="button" id="previous">Go back</button>
+                        <button type="button" id="next">Continue!</button>
+                    </div>
+                    <!-- <button type="button" id="submitButton">Submit your password!</button> -->      
+                </form>
+            </div>
+            <script type="module" src="dataHandler.js"></script>
         </div>
-        <script type="module" src="dataHandler.js"></script>
     </body>
 </html>
