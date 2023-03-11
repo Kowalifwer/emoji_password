@@ -1,5 +1,4 @@
 //create a function, that will map a number (0-100) to a strength color (5 colors total from good to great)
-
 function scoreToColorAndStrength(score) {
     //map color from 0-100, from red to green
     let color = ""
@@ -23,37 +22,42 @@ function scoreToColorAndStrength(score) {
     return [color, strength];
 }
 
-function scorePassword(pass) {
+function scorePassword(password) {
     var score = 0;
-    if (!pass)
+    if (!password)
         return score;
 
-    // award every unique letter until 5 repetitions
-    // award every unique emoji until 4 repetitions
-    var letters = new Object();
-    var emojis = new Object();
-    for (var i=0; i<pass.length; i++) {
-        if (pass[i].match(/[\uD800-\uDFFF]/)) { //IF EMOJI
-            emojis[pass[i]] = (emojis[pass[i]] || 0) + 1;
-            score += 12.0 / emojis[pass[i]];
-        } else { //IF ANY OTHER CHARACTER
-            letters[pass[i]] = (letters[pass[i]] || 0) + 1;
-            score += 5.0 / letters[pass[i]];
-        }
+    // award every unique letter until 3 repetitions
+    var characters = {};
+    for (var i=0; i<password.length; i++) {
+        characters[password[i]] = (characters[password[i]] || 0) + 1;
+        score += 3.0 / characters[password[i]];
     }
 
     // bonus points for mixing it up
-    var variations = {
-        digits: /\d/.test(pass),
-        lower: /[a-z]/.test(pass),
-        upper: /[A-Z]/.test(pass),
-        nonWords: /\W/.test(pass),
-    }
+    var variations = [
+        [1.0, /\d/.test(password)], //digits
+        [0.75, /[a-z]/.test(password)], //lowercase letters
+        [1.0, /[A-Z]/.test(password)], //uppercase letters
+        [1.5, /\W/.test(password) && !/[\uD800-\uDFFF]/.test(password)], //special characters (NO EMOJI)
+        [1.5, /[\uD800-\uDFFF]/.test(password)], //emojis
+    ]
 
     var variationCount = 0;
-    for (var check in variations) {
-        variationCount += (variations[check] == true) ? 1 : 0;
+    for (var tuple of variations) {
+        let weight = tuple[0];
+        let hasVariation = tuple[1];
+        variationCount += (hasVariation) ? weight : 0;
     }
+
+    if (password.length > 12) {
+        score += 15;
+    } else if (password.length > 8) {
+        score += 8;
+    } else if (password.length > 4) {
+        score += 4;
+    }
+
     score += (variationCount - 1) * 10;
 
     return parseInt(Math.min(score, 100));
@@ -175,7 +179,17 @@ document.addEventListener('backendContentLoaded', function() {
             if (e.target.tagName == 'BUTTON') {
                 let container = e.target.closest('section');
                 let containerPwd = container.querySelector('input[type="text"]');
-                containerPwd.value += e.target.innerHTML;
+
+                //if focused on input (if cursor position is not 0)
+                let cursorPos = containerPwd.selectionStart;
+                if (cursorPos != 0) {
+                    let pwd = containerPwd.value;
+                    let before = pwd.substring(0, cursorPos);
+                    let after = pwd.substring(cursorPos, pwd.length);
+                    containerPwd.value = before + e.target.innerHTML + after;
+                } else {
+                    containerPwd.value += e.target.innerHTML;
+                } 
                 containerPwd.dispatchEvent(new Event('input'));
             }
         })
