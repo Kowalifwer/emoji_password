@@ -5,7 +5,6 @@ import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js'
 const USE_FIREBASE = true;
 
 if (USE_FIREBASE) {
-    // import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -195,4 +194,6 @@ if (USE_FIREBASE) {
     //can be HTML constraints, or custom constraints
     //alias, confirm_alias. if alias not empty, -> confim_alias will make input field uneditable and reveal the password fields.
     //alias, pw, pwConfirm
+} else {
+    document.dispatchEvent(new CustomEvent('backendContentLoaded'));
 }

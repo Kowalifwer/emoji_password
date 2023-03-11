@@ -59,7 +59,7 @@ function scorePassword(password) {
     }
 
     score += (variationCount - 1) * 10;
-
+    console.log(score)
     return parseInt(Math.min(score, 100));
 }
 
