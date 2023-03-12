@@ -2,12 +2,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebas
 import { getDatabase, ref, set, get} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"
 import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js'
 
+//enables or disables firebase. if disabled, the database will not be used, and the user will not be able to submit data.
 const USE_FIREBASE = true;
 
 if (USE_FIREBASE) {
-    // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
-
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     const firebaseConfig = {
@@ -25,9 +24,11 @@ if (USE_FIREBASE) {
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app)
 
+    //get the url parameters, and check if the group exists in the database. if it does, we can fetch the task from the database, and display the relevant task to the user.
     let urlParams = new URLSearchParams(window.location.search);
     const GROUP_ID = urlParams.get('group');
 
+    //this function is used inside populateContent, and will fetch the content for the relevant group, and load it into the page.
     function validateGroupAndGetContent() {
         return new Promise((resolve) => {
             get(ref(database, 'groups/' + GROUP_ID)).then((snapshot) => {
@@ -45,6 +46,8 @@ if (USE_FIREBASE) {
         })
     }
 
+    //will render the trial content, IF the group ID is valid.
+    //will also make use of local store to preload any existing content, or to store the content for future use.
     function populateContent() {
         return new Promise((resolve, reject) => {
             let existingContent = localStorage.getItem("groupContent");
@@ -75,6 +78,7 @@ if (USE_FIREBASE) {
         })
     }
 
+    //this function will create a new user in the database, and return the userId
     function initUser() {
         return new Promise((resolve, reject) => {
             let userId = localStorage.getItem("userId");
@@ -105,10 +109,8 @@ if (USE_FIREBASE) {
         //this is called assuming the user is in a valid group, and the user is in the database, and all content is loaded.
 
         let form = document.getElementById("finalForm");
-        //check when the user submits the form, make sure it passes the default validity checks, and then store the data in the database
+        //will handle how the trial data is stored in the database
         form.addEventListener("sendData", (e) => {
-            console.log("sendData event triggered")
-            console.log(e.detail)
 
             //form is valid, we can store the data in the database
             let alias = e.detail.alias;
@@ -191,10 +193,6 @@ if (USE_FIREBASE) {
         })
     });
 
-    //constraints
-    //can be HTML constraints, or custom constraints
-    //alias, confirm_alias. if alias not empty, -> confim_alias will make input field uneditable and reveal the password fields.
-    //alias, pw, pwConfirm
-} else {
+} else { //if NOT firebase, we can tell the frontend that the content is loaded.
     document.dispatchEvent(new CustomEvent('backendContentLoaded'));
 }
