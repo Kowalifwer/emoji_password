@@ -47,7 +47,21 @@ body * {
     margin: 0 10vw;
 }
 
-.instructions span {
+.instructions p {
+    margin: 5px;
+    text-align: left;
+}
+
+.instructions > :first-child {
+    text-decoration: underline;
+    text-align: center;
+}
+
+b {
+    color: rgb(44, 44, 246);
+}
+
+.instructions p {
     font-size: 20px;
     /* underline */
     text-decoration: underline;
