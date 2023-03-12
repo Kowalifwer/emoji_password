@@ -50,6 +50,7 @@ body * {
 .instructions p {
     margin: 5px;
     text-align: left;
+    font-size: 20px;
 }
 
 .instructions > :first-child {
@@ -59,12 +60,6 @@ body * {
 
 b {
     color: rgb(44, 44, 246);
-}
-
-.instructions p {
-    font-size: 20px;
-    /* underline */
-    text-decoration: underline;
 }
 
 #pwdMeter {
