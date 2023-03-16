@@ -1,0 +1,10 @@
+
+#user trial data
+dbData.json
+finalStatistics.json
+postTrialData.txt
+
+#node packages for processing the data
+package-lock.json
+package.json
+node_modules
